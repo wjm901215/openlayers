@@ -138,7 +138,7 @@ export default {
         className: 'map-circle' // 图层的class String, 非必须，默认为 'map-circle'
       },
       mapData: null,
-      mapCenter: [120.07228950670621, 30.524837614865916],
+      mapCenter: [120.109913, 29.181466],
       mapZoom: 8,
       clickCenter: [0, 0],
       popupText: '弹窗初始化文字',
@@ -187,23 +187,24 @@ export default {
       // 获取点击中心点
       this.clickCenter = evt.coordinate
       // 移动地图
-      this.mapData.getView().animate({
-        center: evt.coordinate,
-      })
+      // this.mapData.getView().animate({
+      //   center: evt.coordinate,
+      // })
       // this.mapOverlayData.position = [ 120.07446564886402, 30.524799941013985 ]
       // 这个做了一个点击改变中心点的操作
-      setTimeout(() => {
-        this.mapIconData.position = [120.07438338675577, 30.522278765283236]
-        this.mapData.getView().animate({
-          center: [120.07438338675577, 30.522278765283236],
-        })
-      }, 5000)
+      // setTimeout(() => {
+      //   this.mapIconData.position = [120.07438338675577, 30.522278765283236]
+      //   this.mapData.getView().animate({
+      //     center: [120.07438338675577, 30.522278765283236],
+      //   })
+      // }, 5000)
     },
     // 鼠标划过地图事件
     mapPointerMove(evt) {
       if (evt.dragging) {
         return
       }
+      console.log("evt",evt)
       // 获取地图上的重叠像素（用来获得叠加图层）
       const pixel = this.mapData.getEventPixel(evt.originalEvent)
       const hit = this.mapData.hasFeatureAtPixel(pixel)
@@ -211,6 +212,7 @@ export default {
       const feature = this.mapData.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
         return feature
       })
+      console.log("feature",feature)
       // 获取叠加图层对像素叠加图层（hit）设置鼠标样式（给标注点添加鼠标经过样式）
       this.mapData.getTarget().style.cursor = hit ? 'pointer' : ''
       // 鼠标移动到点标注的时候显示弹出窗体，feature.get('name') 可以获取标注标题，如果设置了的话

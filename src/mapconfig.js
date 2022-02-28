@@ -5,7 +5,7 @@ import Projection from 'ol/proj/Projection'
 import WMTS from 'ol/source/WMTS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 // 0 表示部署的离线瓦片地图，1表示OSM, 2表示使用Arcgis在线午夜蓝地图服务
-const maptype = 1
+const maptype = 0
 //天地图卫星影像
 const tian_di_tu_satellite = new TileLayer({
     title: "天地图卫星影像",
@@ -41,7 +41,7 @@ const streetmap = function () {
             maplayer =new TileLayer({
                 source: new WMTS({
                     //服务地址
-                    url: 'http://localhost:8080/geoserver/gwc/service/wmts',
+                    url: 'http://192.168.1.189:8080/geoserver/gwc/service/wmts',
                     layer: 'shengting:zhej',
                     //切片集
                     matrixSet: 'SCSG2000',
@@ -59,7 +59,7 @@ const streetmap = function () {
                 }),
 
             })
-            return [ tian_di_tu_satellite,maplayer]
+            return [tian_di_tu_satellite,maplayer]
     }
 }
 const mapconfig = {
